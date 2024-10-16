@@ -9,7 +9,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Star, StarHalf } from "lucide-react";
+
+import { Icon } from "@iconify-icon/react";
+import starIcon from "@iconify-icons/mdi/star";
+import starHalfFullIcon from "@iconify-icons/mdi/star-half-full";
+import starOutlineIcon from "@iconify-icons/mdi/star-outline";
 
 type EnergySupplierCardProps = {
   id: string;
@@ -74,13 +78,17 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
         <div className="flex items-center gap-1">
           <div className="flex">
             {Array.from({ length: numberOfFullStars }).map((_, i) => {
-              return <Star fill="black" strokeWidth={0} key={i} />;
+              return <Icon className="text-xl" icon={starIcon} key={i} />;
             })}
 
-            {hasHalfStar && <StarHalf fill="black" />}
+            {hasHalfStar && (
+              <Icon className="text-xl" icon={starHalfFullIcon} />
+            )}
 
             {Array.from({ length: numberOfEmptyStars }).map((_, i) => {
-              return <Star key={i} />;
+              return (
+                <Icon className="text-xl" icon={starOutlineIcon} key={i} />
+              );
             })}
           </div>
 
