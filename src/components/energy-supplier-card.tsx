@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { Icon } from "@iconify-icon/react";
 import starIcon from "@iconify-icons/mdi/star";
@@ -75,7 +76,7 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
         <CardDescription>{state}</CardDescription>
       </CardHeader>
       <CardContent className="-mt-4">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 mb-4">
           <div className="flex">
             {Array.from({ length: numberOfFullStars }).map((_, i) => {
               return <Icon className="text-xl" icon={starIcon} key={i} />;
@@ -117,6 +118,50 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
 
       <CardFooter className="flex">
         <Button className="w-full">Receber proposta</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+export function SkeletonEnergySupplierCard() {
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-center gap-2">
+          <Avatar className="h-8 w-8">
+            <AvatarFallback className="text-sm">
+              <Skeleton />
+            </AvatarFallback>
+          </Avatar>
+
+          <Skeleton className="h-6 w-full" />
+        </div>
+
+        <div>
+          <Skeleton className="h-4 w-1/2" />
+        </div>
+      </CardHeader>
+      <CardContent className="-mt-4">
+        <div className="flex items-center gap-1 mb-4">
+          <Skeleton className="h-4 w-[100px]" />
+          <Skeleton className="h-4 w-[72px]" />
+        </div>
+
+        <ul className="flex gap-2 flex-col mt-2">
+          <li>
+            <Skeleton className="h-4 w-full" />
+          </li>
+          <li>
+            <Skeleton className="h-4 w-full" />
+          </li>
+          <li>
+            <Skeleton className="h-4 w-full" />
+          </li>
+        </ul>
+      </CardContent>
+
+      <CardFooter className="flex">
+        <Skeleton className="h-10 w-full" />
       </CardFooter>
     </Card>
   );
