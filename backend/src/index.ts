@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
+import cors from "cors";
 import express from "express";
 import { z } from "zod";
 
 const app = express();
+app.use(cors());
 
 const EnergySupplierQueryParamsSchema = z.object({
   monthlyConsumption: z.coerce.number().positive(),
@@ -30,4 +32,6 @@ app.get("/energy-suppliers", async (req, res) => {
   return;
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
+});
