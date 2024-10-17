@@ -62,7 +62,7 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
       <CardHeader>
         <CardTitle className="flex items-start gap-2">
           <Avatar className="h-11 w-11">
-            <AvatarImage src={logo} alt="@shadcn" />
+            <AvatarImage src={logo} alt={`Logo da empresa ${name}`} />
             <AvatarFallback className="text-sm">
               {getInitials(name)}
             </AvatarFallback>
