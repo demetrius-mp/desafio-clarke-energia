@@ -29,7 +29,7 @@ export function PageContent() {
         <>
           <Separator className="mt-8 mb-4" />
 
-          <Typography variant="h4">
+          <Typography variant="h4" className="text-center md:text-start">
             Encontrando as melhores opções para você...
           </Typography>
 

@@ -136,35 +136,37 @@ export function SkeletonEnergySupplierCard() {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center gap-2">
-          <Avatar className="h-8 w-8">
+        <div className="flex items-start gap-2">
+          <Avatar className="h-11 w-11">
             <AvatarFallback className="text-sm">
               <Skeleton />
             </AvatarFallback>
           </Avatar>
 
-          <Skeleton className="h-6 w-full" />
-        </div>
-
-        <div>
-          <Skeleton className="h-4 w-1/2" />
+          <div className="flex flex-col justify-between gap-2 w-full">
+            <Skeleton className="h-6 w-full" />
+            <Skeleton className="h-3 w-1/2" />
+          </div>
         </div>
       </CardHeader>
-      <CardContent className="-mt-4">
-        <div className="flex items-center gap-1 mb-4">
+      <CardContent className="-mt-2">
+        <div className="flex items-center gap-1 mb-5">
           <Skeleton className="h-4 w-[100px]" />
-          <Skeleton className="h-4 w-[72px]" />
+          <Skeleton className="h-4 w-[64px]" />
         </div>
 
-        <ul className="flex gap-2 flex-col mt-2">
+        <ul className="flex gap-1.5 flex-col">
           <li>
-            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-6 w-full" />
           </li>
           <li>
-            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-6 w-full" />
           </li>
           <li>
-            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-6 w-full" />
+          </li>
+          <li>
+            <Skeleton className="h-6 w-full" />
           </li>
         </ul>
       </CardContent>
