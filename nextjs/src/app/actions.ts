@@ -1,16 +1,15 @@
 import { MonthlyConsumptionSchema } from "@/lib/schemas";
-import { createFormActionWithResult } from "@/lib/utils/create-form-action";
+import { createFormAction } from "@/lib/utils/create-form-action";
 import { Entities } from "@/types";
 
-export const fetchEnergySuppliers = createFormActionWithResult<
-  Entities.EnergySupplier[]
->()({
+export const fetchSuppliers = createFormAction({
   schema: MonthlyConsumptionSchema,
-  action: async ({}) => {
+  async action() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
+
     return {
       status: "success",
-      result: [],
+      result: [] as Entities.EnergySupplier[],
     };
   },
 });

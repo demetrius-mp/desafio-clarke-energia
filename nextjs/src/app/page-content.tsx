@@ -1,7 +1,7 @@
 "use client";
 
 import { Else, If, Then } from "react-if";
-import { fetchEnergySuppliers } from "@/app/actions";
+import { fetchSuppliers } from "@/app/actions";
 import {
   EnergySupplierCard,
   EnergySupplierCardGrid,
@@ -11,19 +11,15 @@ import { MonthlyConsumptionForm } from "@/components/forms/monthly-consumption-f
 import { Typography } from "@/components/typography";
 import { Separator } from "@/components/ui/separator";
 import { pluralize } from "@/lib/utils/pluralize";
-import { usePendingAction } from "@/lib/hooks/use-pending-action";
+
+import { useFormAction } from "@/lib/hooks/use-handle-submit";
 
 export function PageContent() {
-  const [state, action, isPending] = usePendingAction(
-    fetchEnergySuppliers,
-    null
-  );
+  const [state, handleSubmit, isPending] = useFormAction(fetchSuppliers);
 
   return (
     <>
-      <form action={action}>
-        <MonthlyConsumptionForm state={state} />
-      </form>
+      <MonthlyConsumptionForm state={state} onSubmit={handleSubmit} />
 
       {isPending && (
         <>
