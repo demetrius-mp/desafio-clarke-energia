@@ -1,4 +1,5 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+"use client";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -12,54 +13,54 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-const MonthlyConsumptionSchema = z.object({
-  monthlyConsumption: z.coerce
-    .number({
-      invalid_type_error: "Valor inválido",
-      message: "Valor inválido",
-      required_error: "Valor inválido",
-    })
-    .positive("O valor deve ser maior que 0"),
-});
+import { MonthlyConsumptionSchema } from "@/lib/schemas";
+import { useFormStatus } from "react-dom";
 
 type MonthlyConsumptionFormProps = {
-  onSubmit: (values: z.infer<typeof MonthlyConsumptionSchema>) => Promise<void>;
+  state: {
+    status: "success" | "error";
+    errors?: Partial<
+      z.typeToFlattenedError<z.infer<typeof MonthlyConsumptionSchema>>
+    >;
+  } | null;
 };
 
 export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
-  const { onSubmit } = props;
+  const { state } = props;
 
   const form = useForm<z.infer<typeof MonthlyConsumptionSchema>>({
-    resolver: zodResolver(MonthlyConsumptionSchema),
     reValidateMode: "onSubmit",
     defaultValues: {
       monthlyConsumption: 0,
     },
   });
 
+  const { pending } = useFormStatus();
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="monthlyConsumption"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Consumo mensal (em kWh)</FormLabel>
+      <FormField
+        control={form.control}
+        name="monthlyConsumption"
+        render={({ field }) => (
+          <FormItem className="w-full">
+            <FormLabel>Consumo mensal (em kWh)</FormLabel>
 
-              <div className="flex gap-2">
-                <FormControl>
-                  <Input type="number" placeholder="30000" {...field} />
-                </FormControl>
+            <div className="flex gap-2">
+              <FormControl>
+                <Input type="number" placeholder="30000" {...field} />
+              </FormControl>
 
-                <Button type="submit">Buscar</Button>
-              </div>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </form>
+              <Button type="submit" disabled={pending}>
+                Buscar
+              </Button>
+            </div>
+            <FormMessage>
+              {state?.errors?.fieldErrors?.monthlyConsumption?.at(0)}
+            </FormMessage>
+          </FormItem>
+        )}
+      />
     </Form>
   );
 }
