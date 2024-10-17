@@ -50,7 +50,7 @@ export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
 
               <div className="flex gap-2">
                 <FormControl>
-                  <Input type="number" placeholder="30000kwh" {...field} />
+                  <Input type="number" placeholder="30000" {...field} />
                 </FormControl>
 
                 <Button type="submit">Buscar</Button>
