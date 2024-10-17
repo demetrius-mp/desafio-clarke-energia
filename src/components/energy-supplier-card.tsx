@@ -97,6 +97,12 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
 
         <ul className="ml-6 list-disc [&>li]:mt-2">
           <li>
+            Quantidade de clientes:{" "}
+            <span className="font-semibold">
+              {numberFormatter.format(totalClients)}
+            </span>
+          </li>
+          <li>
             Custo por kWh:{" "}
             <span className="font-semibold">
               {currencyFormatter.format(costPerKwh)}
@@ -106,12 +112,6 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
             Limite mínimo de kWh:{" "}
             <span className="font-semibold">
               {numberFormatter.format(minKwhLimit)} kWh
-            </span>
-          </li>
-          <li>
-            Quantidade de clientes:{" "}
-            <span className="font-semibold">
-              {numberFormatter.format(totalClients)}
             </span>
           </li>
           <li className="underline">
