@@ -10,11 +10,14 @@ import {
 import { MonthlyConsumptionForm } from "@/components/forms/monthly-consumption-form";
 import { Typography } from "@/components/typography";
 import { Separator } from "@/components/ui/separator";
-import { useFormState } from "react-dom";
 import { pluralize } from "@/lib/utils/pluralize";
+import { usePendingAction } from "@/lib/hooks/use-pending-action";
 
 export function PageContent() {
-  const [state, action, isPending] = useFormState(fetchEnergySuppliers, null);
+  const [state, action, isPending] = usePendingAction(
+    fetchEnergySuppliers,
+    null
+  );
 
   return (
     <>
