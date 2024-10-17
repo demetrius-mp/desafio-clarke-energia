@@ -60,17 +60,19 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Avatar className="h-8 w-8">
+        <CardTitle className="flex items-start gap-2">
+          <Avatar className="h-11 w-11">
             <AvatarImage src={logo} alt="@shadcn" />
             <AvatarFallback className="text-sm">
               {getInitials(name)}
             </AvatarFallback>
           </Avatar>
 
-          {name}
+          <div className="flex flex-col gap-0.5">
+            {name}
+            <CardDescription className="font-normal">{state}</CardDescription>
+          </div>
         </CardTitle>
-        <CardDescription>{state}</CardDescription>
       </CardHeader>
       <CardContent className="-mt-4">
         <div className="flex items-center gap-1 mb-4">
