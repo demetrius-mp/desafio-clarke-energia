@@ -17,7 +17,9 @@ import starIcon from "@iconify-icons/mdi/star";
 import starHalfFullIcon from "@iconify-icons/mdi/star-half-full";
 import starOutlineIcon from "@iconify-icons/mdi/star-outline";
 
-type EnergySupplierCardProps = Entities.EnergySupplier;
+type EnergySupplierCardProps = Entities.EnergySupplier & {
+  monthlyConsumption: number;
+};
 
 function getInitials(name: string) {
   const splitted = name.split(" ");
@@ -37,6 +39,8 @@ const currencyFormatter = new Intl.NumberFormat("pt-BR", {
   currency: "BRL",
 });
 
+const numberFormatter = new Intl.NumberFormat("pt-BR");
+
 export function EnergySupplierCard(props: EnergySupplierCardProps) {
   const {
     name,
@@ -46,6 +50,7 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
     minKwhLimit,
     totalClients,
     averageRating,
+    monthlyConsumption,
   } = props;
 
   const numberOfFullStars = Math.floor(averageRating + Number.EPSILON);
@@ -99,11 +104,21 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
           </li>
           <li>
             Limite mínimo de kWh:{" "}
-            <span className="font-semibold">{minKwhLimit} kWh</span>
+            <span className="font-semibold">
+              {numberFormatter.format(minKwhLimit)} kWh
+            </span>
           </li>
           <li>
             Quantidade de clientes:{" "}
-            <span className="font-semibold">{totalClients}</span>
+            <span className="font-semibold">
+              {numberFormatter.format(totalClients)}
+            </span>
+          </li>
+          <li className="underline">
+            Custo do seu consumo:{" "}
+            <span className="font-semibold">
+              {currencyFormatter.format(costPerKwh * monthlyConsumption)}
+            </span>
           </li>
         </ul>
       </CardContent>

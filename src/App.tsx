@@ -12,8 +12,11 @@ import { Separator } from "@/components/ui/separator";
 import { useFetcher } from "@/hooks/use-fetcher";
 import { fetchEnergySuppliers } from "@/lib/fetchers/fetch-energy-suppliers";
 import { pluralize } from "@/lib/pluralize";
+import { useState } from "react";
 
 function App() {
+  const [monthlyConsumption, setMonthlyConsumption] = useState<number>(0);
+
   const { data, isPending, refetch } = useFetcher({
     fetcher: fetchEnergySuppliers,
   });
@@ -27,6 +30,7 @@ function App() {
 
       <MonthlyConsumptionForm
         onSubmit={async (values) => {
+          setMonthlyConsumption(values.monthlyConsumption);
           await refetch({
             monthlyConsumption: values.monthlyConsumption,
           });
@@ -71,7 +75,11 @@ function App() {
 
               <EnergySupplierCardGrid>
                 {data.map((supplier) => (
-                  <EnergySupplierCard key={supplier.id} {...supplier} />
+                  <EnergySupplierCard
+                    monthlyConsumption={monthlyConsumption}
+                    key={supplier.id}
+                    {...supplier}
+                  />
                 ))}
               </EnergySupplierCardGrid>
             </Else>
