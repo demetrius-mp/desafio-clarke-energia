@@ -15,21 +15,23 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const formSchema = z.object({
+const MonthlyConsumptionSchema = z.object({
   monthlyConsumption: z.coerce.number().positive(),
 });
 
-export function MonthlyConsumptionForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+type MonthlyConsumptionFormProps = {
+  onSubmit: (values: z.infer<typeof MonthlyConsumptionSchema>) => Promise<void>;
+};
+
+export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
+  const { onSubmit } = props;
+
+  const form = useForm<z.infer<typeof MonthlyConsumptionSchema>>({
+    resolver: zodResolver(MonthlyConsumptionSchema),
     defaultValues: {
       monthlyConsumption: 0,
     },
   });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
 
   return (
     <Form {...form}>
@@ -44,12 +46,7 @@ export function MonthlyConsumptionForm() {
             <FormItem className="w-full">
               <FormLabel>Consumo mensal (em kWh)</FormLabel>
               <FormControl>
-                <Input
-                  type="number"
-                  min={0.01}
-                  placeholder="30000kwh"
-                  {...field}
-                />
+                <Input type="number" placeholder="30000kwh" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

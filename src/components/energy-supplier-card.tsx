@@ -10,22 +10,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Entities } from "@/types";
 
 import { Icon } from "@iconify-icon/react";
 import starIcon from "@iconify-icons/mdi/star";
 import starHalfFullIcon from "@iconify-icons/mdi/star-half-full";
 import starOutlineIcon from "@iconify-icons/mdi/star-outline";
 
-type EnergySupplierCardProps = {
-  id: string;
-  name: string;
-  logo: string;
-  state: string;
-  costPerKwh: number;
-  minKwhLimit: number;
-  totalClients: number;
-  averageRating: number;
-};
+type EnergySupplierCardProps = Entities.EnergySupplier;
 
 function getInitials(name: string) {
   const splitted = name.split(" ");
@@ -164,5 +156,17 @@ export function SkeletonEnergySupplierCard() {
         <Skeleton className="h-10 w-full" />
       </CardFooter>
     </Card>
+  );
+}
+
+export function EnergySupplierCardGrid({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-4">
+      {children}
+    </div>
   );
 }
