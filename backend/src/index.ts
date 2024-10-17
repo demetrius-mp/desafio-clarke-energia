@@ -1,1 +1,3 @@
-console.log("234");
+import { CONSTANT } from "@/lib";
+
+console.log(CONSTANT);
