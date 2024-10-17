@@ -21,8 +21,8 @@ export function PageContent() {
     <>
       <MonthlyConsumptionForm state={state} onSubmit={handleSubmit} />
 
-      {isPending && (
-        <>
+      <If condition={isPending}>
+        <Then>
           <Separator className="mt-8 mb-4" />
 
           <Typography variant="h4" className="text-center md:text-start">
@@ -34,44 +34,58 @@ export function PageContent() {
               <SkeletonEnergySupplierCard key={index} />
             ))}
           </EnergySupplierCardGrid>
-        </>
-      )}
+        </Then>
 
-      {!isPending &&
-        state?.status === "success" &&
-        state.result !== undefined && (
-          <>
-            <Separator className="mt-8 mb-4" />
+        <Else>
+          {state?.status === "success" && state.result !== undefined && (
+            <>
+              <Separator className="mt-8 mb-4" />
 
-            <If condition={state.result.length === 0}>
-              <Then>
-                <Typography variant="h4" className="text-center md:text-start">
-                  Não encontramos nenhum fornecedor compatível com o seu consumo
-                  mensal.
-                </Typography>
-              </Then>
+              <If condition={state.result.length === 0}>
+                <Then>
+                  <Typography
+                    variant="h4"
+                    className="text-center md:text-start"
+                  >
+                    Não encontramos nenhum fornecedor compatível com o seu
+                    consumo mensal.
+                  </Typography>
+                </Then>
 
-              <Else>
-                <Typography variant="h4" className="text-center md:text-start">
-                  Encontramos {state.result.length}{" "}
-                  {pluralize("fornecedor", state.result.length, "fornecedores")}{" "}
-                  {pluralize("compatível", state.result.length, "compatíveis")}{" "}
-                  com o seu consumo mensal!
-                </Typography>
+                <Else>
+                  <Typography
+                    variant="h4"
+                    className="text-center md:text-start"
+                  >
+                    Encontramos {state.result.length}{" "}
+                    {pluralize(
+                      "fornecedor",
+                      state.result.length,
+                      "fornecedores"
+                    )}{" "}
+                    {pluralize(
+                      "compatível",
+                      state.result.length,
+                      "compatíveis"
+                    )}{" "}
+                    com o seu consumo mensal!
+                  </Typography>
 
-                <EnergySupplierCardGrid>
-                  {state.result.map((supplier) => (
-                    <EnergySupplierCard
-                      monthlyConsumption={0}
-                      key={supplier.id}
-                      {...supplier}
-                    />
-                  ))}
-                </EnergySupplierCardGrid>
-              </Else>
-            </If>
-          </>
-        )}
+                  <EnergySupplierCardGrid>
+                    {state.result.map((supplier) => (
+                      <EnergySupplierCard
+                        monthlyConsumption={0}
+                        key={supplier.id}
+                        {...supplier}
+                      />
+                    ))}
+                  </EnergySupplierCardGrid>
+                </Else>
+              </If>
+            </>
+          )}
+        </Else>
+      </If>
     </>
   );
 }
