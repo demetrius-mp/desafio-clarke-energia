@@ -16,7 +16,13 @@ import {
 import { Input } from "@/components/ui/input";
 
 const MonthlyConsumptionSchema = z.object({
-  monthlyConsumption: z.coerce.number().positive(),
+  monthlyConsumption: z.coerce
+    .number({
+      invalid_type_error: "Valor inválido",
+      message: "Valor inválido",
+      required_error: "Valor inválido",
+    })
+    .positive("O valor deve ser maior que 0"),
 });
 
 type MonthlyConsumptionFormProps = {
@@ -28,6 +34,7 @@ export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
 
   const form = useForm<z.infer<typeof MonthlyConsumptionSchema>>({
     resolver: zodResolver(MonthlyConsumptionSchema),
+    reValidateMode: "onSubmit",
     defaultValues: {
       monthlyConsumption: 0,
     },
@@ -35,27 +42,25 @@ export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="monthlyConsumption"
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel>Consumo mensal (em kWh)</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="30000kwh" {...field} />
-              </FormControl>
+
+              <div className="flex gap-2">
+                <FormControl>
+                  <Input type="number" placeholder="30000kwh" {...field} />
+                </FormControl>
+
+                <Button type="submit">Buscar</Button>
+              </div>
               <FormMessage />
             </FormItem>
           )}
         />
-
-        <div>
-          <Button type="submit">Buscar</Button>
-        </div>
       </form>
     </Form>
   );

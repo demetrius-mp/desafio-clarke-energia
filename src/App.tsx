@@ -21,8 +21,8 @@ function App() {
   return (
     <Container className="my-4 sm:my-6 lg:my-8">
       <PageHeading
-        title="Formulário de consumo mensal"
-        description="Iremos buscar os melhores fornecedores de acordo com as suas necessidades."
+        title="Buscar fornecedores"
+        description="Iremos buscar os melhores fornecedores de acordo com o seu consumo mensal"
       />
 
       <MonthlyConsumptionForm
