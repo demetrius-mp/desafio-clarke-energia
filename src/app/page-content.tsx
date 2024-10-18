@@ -24,6 +24,7 @@ export function PageContent() {
     <>
       <MonthlyConsumptionForm
         state={state}
+        isPending={isPending}
         onSubmit={async (data) => {
           setMonthlyConsumption(data.monthlyConsumption);
 

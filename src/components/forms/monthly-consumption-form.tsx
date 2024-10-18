@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { MonthlyConsumptionSchema } from "@/lib/schemas";
-import { useFormStatus } from "react-dom";
 import { useWatchErrors } from "@/lib/hooks/use-watch-errors";
 
 type MonthlyConsumptionFormProps = {
@@ -26,10 +25,11 @@ type MonthlyConsumptionFormProps = {
   onSubmit: (
     data: z.infer<typeof MonthlyConsumptionSchema>
   ) => void | Promise<void>;
+  isPending: boolean;
 };
 
 export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
-  const { state, onSubmit } = props;
+  const { state, isPending, onSubmit } = props;
 
   const form = useForm<z.infer<typeof MonthlyConsumptionSchema>>({
     resolver: zodResolver(MonthlyConsumptionSchema),
@@ -42,8 +42,6 @@ export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
     form,
     state,
   });
-
-  const { pending } = useFormStatus();
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -60,7 +58,7 @@ export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
                   <Input type="number" placeholder="30000" {...field} />
                 </FormControl>
 
-                <Button type="submit" disabled={pending}>
+                <Button type="submit" disabled={isPending}>
                   Buscar
                 </Button>
               </div>
