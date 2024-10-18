@@ -84,6 +84,16 @@ export function PageContent() {
               </If>
             </>
           )}
+
+          {state?.status === "error" && (
+            <>
+              <Separator className="mt-8 mb-4" />
+
+              <Typography variant="h4" className="text-center md:text-start">
+                {state.message || "Algo deu errado"}
+              </Typography>
+            </>
+          )}
         </Else>
       </If>
     </>
