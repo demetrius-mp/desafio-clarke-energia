@@ -1,3 +1,8 @@
+import { Icon } from "@iconify-icon/react";
+import starIcon from "@iconify-icons/mdi/star";
+import starHalfFullIcon from "@iconify-icons/mdi/star-half-full";
+import starOutlineIcon from "@iconify-icons/mdi/star-outline";
+
 import { Typography } from "@/components/typography";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -11,11 +16,6 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Entities } from "@/types";
-
-import { Icon } from "@iconify-icon/react";
-import starIcon from "@iconify-icons/mdi/star";
-import starHalfFullIcon from "@iconify-icons/mdi/star-half-full";
-import starOutlineIcon from "@iconify-icons/mdi/star-outline";
 
 type EnergySupplierCardProps = Entities.EnergySupplier & {
   monthlyConsumption: number;

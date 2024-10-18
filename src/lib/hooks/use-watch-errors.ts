@@ -14,7 +14,7 @@ type BaseFieldValues = Record<string, any>;
 
 export function useWatchErrors<
   TState extends BaseState,
-  TFieldValues extends BaseFieldValues
+  TFieldValues extends BaseFieldValues,
 >(options: { form: UseFormReturn<TFieldValues>; state: TState | null }) {
   const { form, state } = options;
 

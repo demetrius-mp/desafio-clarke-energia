@@ -3,7 +3,7 @@ import { z } from "zod";
 type CreateFormActionOptions<TSchema extends z.ZodTypeAny, TReturn> = {
   schema: TSchema;
   action: (
-    data: z.infer<TSchema>
+    data: z.infer<TSchema>,
   ) => Promise<FormActionReturnType<TSchema, TReturn>>;
 };
 
@@ -20,11 +20,11 @@ type FormActionReturnType<TSchema extends z.ZodTypeAny, TReturn> =
     };
 
 type FormAction<TSchema extends z.ZodTypeAny, TReturn> = (
-  data: z.infer<TSchema>
+  data: z.infer<TSchema>,
 ) => Promise<FormActionReturnType<TSchema, TReturn>>;
 
 export function createFormAction<TSchema extends z.ZodTypeAny, TReturn>(
-  options: CreateFormActionOptions<TSchema, TReturn>
+  options: CreateFormActionOptions<TSchema, TReturn>,
 ): FormAction<TSchema, TReturn> {
   const { schema, action } = options;
 

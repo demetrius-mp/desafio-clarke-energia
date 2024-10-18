@@ -1,7 +1,7 @@
 import { useState, useTransition } from "react";
 
 export function useFormAction<TPayload, TReturn>(
-  action: (payload: TPayload) => TReturn | Promise<TReturn>
+  action: (payload: TPayload) => TReturn | Promise<TReturn>,
 ) {
   const [isPending, startTransition] = useTransition();
   const [returned, setReturned] = useState<TReturn | null>(null);

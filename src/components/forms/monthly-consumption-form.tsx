@@ -1,8 +1,8 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,8 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { MonthlyConsumptionSchema } from "@/lib/schemas";
 import { useWatchErrors } from "@/lib/hooks/use-watch-errors";
+import { MonthlyConsumptionSchema } from "@/lib/schemas";
 
 type MonthlyConsumptionFormProps = {
   state: {
@@ -23,7 +23,7 @@ type MonthlyConsumptionFormProps = {
     error?: z.ZodError<z.infer<typeof MonthlyConsumptionSchema>>;
   } | null;
   onSubmit: (
-    data: z.infer<typeof MonthlyConsumptionSchema>
+    data: z.infer<typeof MonthlyConsumptionSchema>,
   ) => void | Promise<void>;
   isPending: boolean;
 };

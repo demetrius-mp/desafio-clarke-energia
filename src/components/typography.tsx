@@ -59,9 +59,9 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
         className: cn(variantStyles[variant], noWrap && "truncate", className),
         ...props,
       },
-      children
+      children,
     );
-  }
+  },
 );
 
 Typography.displayName = "Typography";

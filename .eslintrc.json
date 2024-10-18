@@ -1,9 +1,26 @@
 {
+  "plugins": [
+    "simple-import-sort"
+  ],
   "extends": [
     "next/core-web-vitals",
-    "next/typescript"
+    "next/typescript",
+    "plugin:prettier/recommended"
   ],
   "rules": {
-    "@typescript-eslint/no-empty-object-type": "off"
+    "@typescript-eslint/no-empty-object-type": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "prettier/prettier": [
+      "error",
+      {},
+      {
+        "usePrettierrc": true
+      }
+    ]
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
   }
 }

@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Else, If, Then } from "react-if";
+
 import { fetchSuppliers } from "@/app/actions";
 import {
   EnergySupplierCard,
@@ -10,10 +12,8 @@ import {
 import { MonthlyConsumptionForm } from "@/components/forms/monthly-consumption-form";
 import { Typography } from "@/components/typography";
 import { Separator } from "@/components/ui/separator";
-import { pluralize } from "@/lib/utils/pluralize";
-
 import { useFormAction } from "@/lib/hooks/use-handle-submit";
-import { useState } from "react";
+import { pluralize } from "@/lib/utils/pluralize";
 
 export function PageContent() {
   const [state, handleSubmit, isPending] = useFormAction(fetchSuppliers);
@@ -72,12 +72,12 @@ export function PageContent() {
                     {pluralize(
                       "fornecedor",
                       state.result.length,
-                      "fornecedores"
+                      "fornecedores",
                     )}{" "}
                     {pluralize(
                       "compatível",
                       state.result.length,
-                      "compatíveis"
+                      "compatíveis",
                     )}{" "}
                     com o seu consumo mensal!
                   </Typography>
