@@ -13,13 +13,23 @@ import { Separator } from "@/components/ui/separator";
 import { pluralize } from "@/lib/utils/pluralize";
 
 import { useFormAction } from "@/lib/hooks/use-handle-submit";
+import { useState } from "react";
 
 export function PageContent() {
   const [state, handleSubmit, isPending] = useFormAction(fetchSuppliers);
 
+  const [monthlyConsumption, setMonthlyConsumption] = useState(0);
+
   return (
     <>
-      <MonthlyConsumptionForm state={state} onSubmit={handleSubmit} />
+      <MonthlyConsumptionForm
+        state={state}
+        onSubmit={async (data) => {
+          setMonthlyConsumption(data.monthlyConsumption);
+
+          await handleSubmit(data);
+        }}
+      />
 
       <If condition={isPending}>
         <Then>
@@ -74,7 +84,7 @@ export function PageContent() {
                   <EnergySupplierCardGrid>
                     {state.result.map((supplier) => (
                       <EnergySupplierCard
-                        monthlyConsumption={0}
+                        monthlyConsumption={monthlyConsumption}
                         key={supplier.id}
                         {...supplier}
                       />
