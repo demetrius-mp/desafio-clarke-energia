@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model EnergySupplier {
+  id String @id @map("id")
+
+  name          String @map("name") @db.VarChar(256)
+  logo          String @map("logo") @db.Text
+  state         String @map("state") @db.VarChar(128)
+  costPerKwh    Float  @map("cost_per_kwh")
+  minKwhLimit   Float  @map("min_kwh_limit")
+  totalClients  Int    @map("total_clients")
+  averageRating Float  @map("average_rating")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("energy_suppliers")
+}
