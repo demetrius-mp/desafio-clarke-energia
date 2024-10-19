@@ -1,5 +1,17 @@
 # desafio-clarke-energia
 
+## Histórico do repositório
+
+Inicialmente desenvolvi apenas o frontend, com um projeto inicializado pelo [`vite`](https://vite.dev/) com react e typescript, devido a maior velocidade de desenvolvimento e pouca complexidade no projeto. Utilizei uma biblioteca de componentes chamada [`shadcn-ui`](https://ui.shadcn.com/) para construir a interface. Desde o início do projeto me preocupei em entregar uma experiência completa ao usuário, olhando não apenas para o "caminho feliz" da aplicação, mas também para outros fatores como estados de carregamento e estados de erro.
+
+Para lidar com o backend, introduzi um servidor utilizando [`express`](https://expressjs.com/) devido à sua simplicidade e velocidade para desenvolver serviços simples. Também utilizei o [`prisma`](https://prisma.io/) para a camada de acesso ao banco de dados, devido à sua ferramenta para migrações automáticas, modelos compatíveis com typescript, e também o ecossistema de plugins.
+
+Depois, movi o frontend e o backend para um projeto [`nextjs`](https://nextjs.org/). Além de proporcionar renderização de componentes do lado do servidor, esse framework disponibiliza algumas facilidades para lidar com carregamento de dados. Ao utilizar o [`react-hook-form`](https://react-hook-form.com/) para gerenciamento de formulários, em conjunto com [`zod`](https://zod.dev/) para validação de dados, e [`shadcn-ui/forms`](https://ui.shadcn.com/docs/components/form) para construção da interface dos formulários, e [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations), consegui entregar uma experiência integrada do backend ao frontend durante a submissão do formulário.
+
+Com a aplicação funcionando por completo, implementei um dos diferenciais, que é a [utilização do docker](#utilizando-docker) para executar o projeto. A imagem do projeto web foi desenvolvida utilizando multi-stage build, reduzindo bastante o tamanho da imagem. Além disso, adicionei um `docker-compose.yml` com um serviço para o projeto web e outro para o banco de dados. Dessa forma, não é necessário instalar o projeto para executá-lo, basta utilizar o docker compose.
+
+Apesar de conhecer algumas das vantagens do graphql nunca o havia utilizado em nenhum projeto. No entanto, rapidamente consegui aprender o suficiente para colocá-lo no projeto. A integração com o prisma por meio da biblioteca [`pothos`](https://pothos-graphql.dev/docs/plugins/prisma) e a integração com typescript por meio do [`graphql-codegen`](https://the-guild.dev/graphql/codegen) tornou a experiência de carregamento de dados bem fluída e simples de executar.
+
 ## Utilizando docker
 
 Primeiro, crie um arquivo `.env` utilizando o `.env.example` como modelo. Você pode utilizar o seguinte comando para fazer uma cópia do arquivo `.env.example`:
@@ -44,4 +56,4 @@ COPY --from=deps --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 ```
 
-Essas linhas foram necessárias para permitir que o seeder fosse executado de dentro do container, proporcionando uma experiência de execução que requer somente a instalação do `docker compsoe`.
+Essas linhas foram necessárias para permitir que o seeder fosse executado de dentro do container, proporcionando uma experiência de execução que requer somente a instalação do `docker compose`.
