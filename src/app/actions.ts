@@ -8,6 +8,7 @@ import { Entities } from "@/types";
 export const fetchSuppliers = createFormAction({
   schema: MonthlyConsumptionSchema,
   async action(data) {
+    // Simulate a slow request to show loading state
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const energySuppliers = await prisma.energySupplier.findMany({
