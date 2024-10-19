@@ -12,7 +12,7 @@ import {
 import { MonthlyConsumptionForm } from "@/components/forms/monthly-consumption-form";
 import { Typography } from "@/components/typography";
 import { Separator } from "@/components/ui/separator";
-import { useFormAction } from "@/lib/hooks/use-handle-submit";
+import { useFormAction } from "@/lib/hooks/use-form-action";
 import { pluralize } from "@/lib/utils/pluralize";
 
 export function PageContent() {
