@@ -80,7 +80,7 @@ export function PageContent() {
                 <Then>
                   <Typography
                     variant="h4"
-                    className="text-center md:text-start"
+                    className="text-center md:text-start text-balance"
                   >
                     Não encontramos nenhum fornecedor compatível com o seu
                     consumo mensal
@@ -90,7 +90,7 @@ export function PageContent() {
                 <Else>
                   <Typography
                     variant="h4"
-                    className="text-center md:text-start"
+                    className="text-center md:text-start text-balance"
                   >
                     Encontramos {data.energySuppliers.length}{" "}
                     {pluralize(
