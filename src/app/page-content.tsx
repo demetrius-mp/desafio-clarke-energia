@@ -1,38 +1,62 @@
 "use client";
-
+import { useLazyQuery } from "@apollo/client";
 import { useState } from "react";
 import { Else, If, Then } from "react-if";
 
-import { fetchSuppliers } from "@/app/actions";
+import { gql } from "@/__generated__";
 import {
   EnergySupplierCard,
   EnergySupplierCardGrid,
   SkeletonEnergySupplierCard,
 } from "@/components/energy-supplier-card";
-import { MonthlyConsumptionForm } from "@/components/forms/monthly-consumption-form";
 import { Typography } from "@/components/typography";
 import { Separator } from "@/components/ui/separator";
-import { useFormAction } from "@/lib/hooks/use-form-action";
 import { pluralize } from "@/lib/utils/pluralize";
 
+import { MonthlyConsumptionForm } from "./monthly-consumption-form";
+
+const SEARCH_ENERGY_SUPPLIERS = gql(`
+  query GetSuppliers($monthlyConsumption: Int!) {
+    energySuppliers(monthlyConsumption: $monthlyConsumption) {
+      id
+      logo
+      name
+      state
+      averageRating
+      costPerKwh
+      minKwhLimit
+      totalClients
+    }
+  }
+`);
+
 export function PageContent() {
-  const [state, handleSubmit, isPending] = useFormAction(fetchSuppliers);
+  const [search, { loading, data, error }] = useLazyQuery(
+    SEARCH_ENERGY_SUPPLIERS,
+    {
+      // force the query to be executed every time to show loading state
+      fetchPolicy: "network-only",
+    },
+  );
 
   const [monthlyConsumption, setMonthlyConsumption] = useState(0);
 
   return (
     <>
       <MonthlyConsumptionForm
-        state={state}
-        isPending={isPending}
-        onSubmit={async (data) => {
-          setMonthlyConsumption(data.monthlyConsumption);
+        isPending={loading}
+        onSubmit={async (values) => {
+          await search({
+            variables: {
+              monthlyConsumption: values.monthlyConsumption,
+            },
+          });
 
-          await handleSubmit(data);
+          setMonthlyConsumption(values.monthlyConsumption);
         }}
       />
 
-      <If condition={isPending}>
+      <If condition={loading}>
         <Then>
           <Separator className="mt-8 mb-4" />
 
@@ -48,18 +72,18 @@ export function PageContent() {
         </Then>
 
         <Else>
-          {state?.status === "success" && state.result !== undefined && (
+          {data?.energySuppliers && (
             <>
               <Separator className="mt-8 mb-4" />
 
-              <If condition={state.result.length === 0}>
+              <If condition={data.energySuppliers.length === 0}>
                 <Then>
                   <Typography
                     variant="h4"
                     className="text-center md:text-start"
                   >
                     Não encontramos nenhum fornecedor compatível com o seu
-                    consumo mensal.
+                    consumo mensal
                   </Typography>
                 </Then>
 
@@ -68,22 +92,22 @@ export function PageContent() {
                     variant="h4"
                     className="text-center md:text-start"
                   >
-                    Encontramos {state.result.length}{" "}
+                    Encontramos {data.energySuppliers.length}{" "}
                     {pluralize(
                       "fornecedor",
-                      state.result.length,
+                      data.energySuppliers.length,
                       "fornecedores",
                     )}{" "}
                     {pluralize(
                       "compatível",
-                      state.result.length,
+                      data.energySuppliers.length,
                       "compatíveis",
                     )}{" "}
-                    com o seu consumo mensal!
+                    com o seu consumo mensal
                   </Typography>
 
                   <EnergySupplierCardGrid>
-                    {state.result.map((supplier) => (
+                    {data.energySuppliers.map((supplier) => (
                       <EnergySupplierCard
                         monthlyConsumption={monthlyConsumption}
                         key={supplier.id}
@@ -96,12 +120,12 @@ export function PageContent() {
             </>
           )}
 
-          {state?.status === "error" && (
+          {error && (
             <>
               <Separator className="mt-8 mb-4" />
 
               <Typography variant="h4" className="text-center md:text-start">
-                {state.message || "Algo deu errado"}
+                {"Algo deu errado. Tente novamente mais tarde."}
               </Typography>
             </>
           )}

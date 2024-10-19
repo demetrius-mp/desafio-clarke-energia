@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
-import { PageContent } from "@/app/page-content";
 import { Container } from "@/components/container";
 import { PageHeading } from "@/components/page-heading";
+
+import { PageContent } from "./page-content";
 
 export const metadata: Metadata = {
   title: "Buscar fornecedores",
