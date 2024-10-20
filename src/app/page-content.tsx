@@ -64,7 +64,7 @@ export function PageContent() {
             Encontrando as melhores opções para você...
           </Typography>
 
-          <EnergySupplierCardGrid>
+          <EnergySupplierCardGrid aria-hidden>
             {Array.from({ length: 6 }).map((_, index) => (
               <SkeletonEnergySupplierCard key={index} />
             ))}

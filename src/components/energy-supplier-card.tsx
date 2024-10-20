@@ -2,6 +2,7 @@ import { Icon } from "@iconify-icon/react";
 import starIcon from "@iconify-icons/mdi/star";
 import starHalfFullIcon from "@iconify-icons/mdi/star-half-full";
 import starOutlineIcon from "@iconify-icons/mdi/star-outline";
+import { ComponentPropsWithoutRef } from "react";
 
 import { Typography } from "@/components/typography";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,6 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils/shadcn-utils";
 import { Entities } from "@/types";
 
 type EnergySupplierCardProps = Entities.EnergySupplier & {
@@ -180,11 +182,16 @@ export function SkeletonEnergySupplierCard() {
 
 export function EnergySupplierCardGrid({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  ...props
+}: ComponentPropsWithoutRef<"div">) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-4">
+    <div
+      {...props}
+      className={cn(
+        "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-4",
+        props.className,
+      )}
+    >
       {children}
     </div>
   );
