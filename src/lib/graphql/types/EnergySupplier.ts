@@ -22,7 +22,7 @@ builder.queryType({
         monthlyConsumption: t.arg.int({ required: true }),
       },
       resolve: async (query, _, { monthlyConsumption }) => {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         return await prisma.energySupplier.findMany({
           ...query,
