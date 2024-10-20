@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "docker-entrypoint": "prisma migrate deploy && node server.js",
     "graphql:compile": "graphql-codegen",
     "cypress:open": "cypress open"
