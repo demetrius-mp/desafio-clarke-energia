@@ -28,6 +28,7 @@ export function MonthlyConsumptionForm(props: MonthlyConsumptionFormProps) {
 
   const form = useForm<z.infer<typeof MonthlyConsumptionSchema>>({
     resolver: zodResolver(MonthlyConsumptionSchema),
+    reValidateMode: "onSubmit",
     defaultValues: {
       monthlyConsumption: 0,
     },
