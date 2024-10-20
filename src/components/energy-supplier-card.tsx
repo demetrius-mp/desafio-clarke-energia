@@ -61,21 +61,21 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-start gap-2">
-          <Avatar className="h-11 w-11">
+          <Avatar id="company-logo" className="h-11 w-11">
             <AvatarImage src={logo} alt={`Logo da empresa ${name}`} />
             <AvatarFallback className="text-sm">
               {getInitials(name)}
             </AvatarFallback>
           </Avatar>
 
-          <div className="flex flex-col gap-0.5">
+          <div id="company-identification" className="flex flex-col gap-0.5">
             {name}
             <CardDescription className="font-normal">{state}</CardDescription>
           </div>
         </CardTitle>
       </CardHeader>
       <CardContent className="-mt-4">
-        <div className="flex items-center gap-1 mb-4">
+        <div id="company-rating" className="flex items-center gap-1 mb-4">
           <div className="flex">
             {Array.from({ length: numberOfFullStars }).map((_, i) => {
               return <Icon className="text-xl" icon={starIcon} key={i} />;
@@ -97,7 +97,7 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
           </Typography>
         </div>
 
-        <ul className="ml-6 list-disc [&>li]:mt-2">
+        <ul id="company-info" className="ml-6 list-disc [&>li]:mt-2">
           <li>
             Quantidade de clientes:{" "}
             <span className="font-semibold">
