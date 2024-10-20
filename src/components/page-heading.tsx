@@ -11,7 +11,10 @@ export function PageHeading(props: PageHeadingProps) {
 
   return (
     <>
-      <div className="md:flex md:items-center md:justify-between">
+      <div
+        id="page-heading"
+        className="md:flex md:items-center md:justify-between"
+      >
         <div className="min-w-0 flex-1">
           <Typography variant="h2">{title}</Typography>
 
