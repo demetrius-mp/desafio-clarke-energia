@@ -1,5 +1,34 @@
 # desafio-clarke-energia
 
+> Desafio para a posição de engenheiro de software full-stack na Clarke Energia.
+
+## Índice
+
+- [desafio-clarke-energia](#desafio-clarke-energia)
+  - [Índice](#índice)
+  - [Tecnologias e plataformas](#tecnologias-e-plataformas)
+  - [Histórico do repositório](#histórico-do-repositório)
+  - [Executando o projeto](#executando-o-projeto)
+  - [Utilizando docker](#utilizando-docker)
+    - [Sobre o docker neste projeto](#sobre-o-docker-neste-projeto)
+
+## Tecnologias e plataformas
+
+Tecnologias utilizadas:
+
+- NextJS para uma experiência mais integrada entre o frontend (com React) e backend (com NodeJS).
+- Cypress para teste de componentes e teste end-to-end.
+- Graphql para tráfego de dados entre o backend e frontend.
+- ShadcnUI para construir a interface e experiência do usuário.
+
+Plataformas utilizadas:
+
+- Sistema operacional: Ubuntu 24.04.1 LTS
+- NodeJS v20.10.0
+- NPM v10.8.1
+- Docker v27.2.1, build 9e34c9b
+- Docker compose v2.29.2
+
 ## Histórico do repositório
 
 Inicialmente desenvolvi apenas o frontend, com um projeto inicializado pelo [`vite`](https://vite.dev/) com react e typescript, devido a maior velocidade de desenvolvimento e pouca complexidade no projeto. Utilizei uma biblioteca de componentes chamada [`shadcn-ui`](https://ui.shadcn.com/) para construir a interface. Desde o início do projeto me preocupei em entregar uma experiência completa ao usuário, olhando não apenas para o "caminho feliz" da aplicação, mas também para outros fatores como estados de carregamento e estados de erro.
@@ -11,6 +40,33 @@ Depois, movi o frontend e o backend para um projeto [`nextjs`](https://nextjs.or
 Com a aplicação funcionando por completo, implementei um dos diferenciais, que é a [utilização do docker](#utilizando-docker) para executar o projeto. A imagem do projeto web foi desenvolvida utilizando multi-stage build, reduzindo bastante o tamanho da imagem. Além disso, adicionei um `docker-compose.yml` com um serviço para o projeto web e outro para o banco de dados. Dessa forma, não é necessário instalar o projeto para executá-lo, basta utilizar o docker compose.
 
 Apesar de conhecer algumas das vantagens do graphql nunca o havia utilizado em nenhum projeto. No entanto, rapidamente consegui aprender o suficiente para colocá-lo no projeto. A integração com o prisma por meio da biblioteca [`pothos`](https://pothos-graphql.dev/docs/plugins/prisma) e a integração com typescript por meio do [`graphql-codegen`](https://the-guild.dev/graphql/codegen) tornou a experiência de carregamento de dados bem fluída e simples de executar.
+
+## Executando o projeto
+
+> [!NOTE]  
+> Caso queira executar somente em modo de produção, leia o guia [Utilizando docker](#utilizando-docker).
+
+Depois de clonar o repositório, instale as dependências utilizando o `npm`:
+
+```sh
+npm i
+```
+
+Crie um arquivo `.env` com uma variável chamada `DATABASE_URL` contendo a URL para o seu banco de dados PostgreSQL. Para entender o formato da URL, leia [esse guia](https://www.prisma.io/docs/orm/overview/databases/postgresql#connection-url).
+
+Depois, execute as migrações do banco de dados e gere o cliente para acesso ao banco com o seguinte comando:
+
+```sh
+npx prisma migrate dev
+```
+
+Esse comando também irá inserir os dados fictícios no banco de dados por meio de um seeder (que pode ser encontrado [aqui](/prisma/seed.ts)).
+
+Por fim, inicie o servidor web utilizando o seguinte comando:
+
+```sh
+npm run dev
+```
 
 ## Utilizando docker
 
