@@ -7,6 +7,7 @@
 - [desafio-clarke-energia](#desafio-clarke-energia)
   - [Índice](#índice)
   - [Tecnologias e plataformas](#tecnologias-e-plataformas)
+  - [Scripts adicionais](#scripts-adicionais)
   - [Histórico do repositório](#histórico-do-repositório)
   - [Executando o projeto](#executando-o-projeto)
   - [Utilizando docker](#utilizando-docker)
@@ -28,6 +29,12 @@ Plataformas utilizadas:
 - NPM v10.8.1
 - Docker v27.2.1, build 9e34c9b
 - Docker compose v2.29.2
+
+## Scripts adicionais
+
+- `npm run cypress:open`: inicializa o cypress para executar os testes automatizados.
+- `npm run graphql:compile`: gera os tipos para o cliente graphql.
+- `npm run lint:fix`: executa o eslint e corrige inconsistências.
 
 ## Histórico do repositório
 
