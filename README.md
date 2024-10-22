@@ -21,6 +21,8 @@ Tecnologias utilizadas:
 - Cypress para teste de componentes e teste end-to-end.
 - Graphql para tráfego de dados entre o backend e frontend.
 - ShadcnUI para construir a interface e experiência do usuário.
+- Vercel para deploy gratuito da aplicação (backend e fronted).
+- Supabase para hospedagem gratuita do banco de dados PostgreSQL.
 
 Plataformas utilizadas:
 
