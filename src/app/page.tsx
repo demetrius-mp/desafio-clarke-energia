@@ -7,6 +7,8 @@ import { PageContent } from "./page-content";
 
 export const metadata: Metadata = {
   title: "Buscar fornecedores",
+  description:
+    "Iremos buscar os melhores fornecedores de acordo com o seu consumo mensal",
 };
 
 export default function Home() {
