@@ -118,7 +118,7 @@ export function EnergySupplierCard(props: EnergySupplierCardProps) {
               {numberFormatter.format(minKwhLimit)} kWh
             </span>
           </li>
-          <li className="underline">
+          <li>
             Custo por {numberFormatter.format(monthlyConsumption)} kWh:{" "}
             <span className="font-semibold">
               {currencyFormatter.format(costPerKwh * monthlyConsumption)}
