@@ -1,22 +1,20 @@
+type Button = {
+  label: string;
+  link: string;
+};
+
 export type NestedForm = {
-  navspot: {
-    name: string;
+  promotionsSection: {
+    title: string;
+    subtitle: string;
     iconUrl: string;
-  }[];
-  internalPages: [
-    string,
-    {
+    entries: {
+      id: string;
       title: string;
-      iconUrl: string;
-      tabs: {
-        tabName: string;
-        chips: {
-          chipName: string;
-          sections: {
-            sectionName: string;
-          }[];
-        }[];
-      }[];
-    },
-  ][];
+      subtitle: string;
+      imageUrl: string;
+      button: Button | null;
+      secondaryButton: Button | null;
+    }[];
+  };
 };
